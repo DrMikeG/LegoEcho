@@ -7,3 +7,5 @@ Secondly, recording some URLs:
 
 https://www.hackster.io/Notthemarsian/take-control-over-lego-power-functions-ee0bfa
 (this is the place for me to start)
+
+https://www.theengineeringprojects.com/2017/07/introduction-to-l293d.html
