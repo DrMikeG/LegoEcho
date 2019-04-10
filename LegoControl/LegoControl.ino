@@ -34,6 +34,8 @@ int motorDirection = 1;                      // Forward (1) or reverse (0)
 int steering = 0;                            // Servo position 0..255
 int steeringDirection = 0;                   // Left (0) and Right (1)
 
+int joyX = A0;
+int joyY = A1;
 
 
 void setup() 
@@ -76,6 +78,36 @@ void loop()
    else motorDirection = 0;                      // Set car in reverse if iRCspeed = -100..0
    motorSpeed = int(2.55*abs(iRCspeed));         // Set speed 0..255 based on command 0..100
    */
+
+// put your main code here, to run repeatedly:
+  int xValue = analogRead(joyX);
+  int yValue = analogRead(joyY);
+ 
+  //print the values with to plot or view
+  //Serial.print(xValue);
+  //Serial.print("\t");
+  //Serial.println(yValue);
+
+  //0,500 is negative, getting slower
+  //501-520 is stop
+  //520-1023 is postive getting faster
+
+  if (xValue > 500 && xValue <520)
+  {
+    motorSpeed = 0;
+  }
+  else if (xValue > 519) {
+   motorSpeed = map(xValue,519,1023,0,255);
+   motorDirection = 1; 
+  } else if (xValue < 500)
+  {
+    motorSpeed = map(xValue,518,0,0,255);
+    motorDirection = 0;
+  }
+  Serial.println(motorSpeed);
+  SetMotorControl();        
+  delay(100);
+   /*
    Serial.println("Forward 126");
    motorDirection = 1;
    motorSpeed = 126;  
@@ -92,7 +124,7 @@ void loop()
    motorSpeed = 64;  
    SetMotorControl();        
    delay(2000);
-   
+   */
 }
 
 
