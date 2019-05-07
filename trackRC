@@ -1,0 +1,22 @@
+https://learn.sparkfun.com/tutorials/sx1509-io-expander-breakout-hookup-guide
+
+https://pimylifeup.com/raspberry-pi-distance-sensor/
+
+https://www.google.com/search?q=arduino+hc-sr04&tbm=isch&source=iu&ictx=1&fir=51YEMHff7Yh4MM%253A%252C-DfaHjziSuhVIM%252C_&vet=1&usg=AI4_-kQZZvmLoH8mS-F-jSnjtTmukhxfPg&sa=X&ved=2ahUKEwiRjqq5i4riAhXIZlAKHTfCDzAQ9QEwAHoECAwQBg#imgrc=51YEMHff7Yh4MM:
+
+ping trackRC.local
+
+ssh pi@trackRC.local
+
+
+https://learn.sparkfun.com/tutorials/sx1509-io-expander-breakout-hookup-guide/discuss
+
+Install wiringPi on raspberry Pi
+
+Download the Sparkfun library from github
+
+** To compile **
+
+g++ -c sx1509_registers.h SparkFunSX1509.h SparkFunSX1509.cpp -std=gnu++11 -lwiringPi -lpthread
+
+https://github.com/hoppler/SparkFun-SX1509
