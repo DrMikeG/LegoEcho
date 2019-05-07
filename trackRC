@@ -20,3 +20,14 @@ Download the Sparkfun library from github
 g++ -c sx1509_registers.h SparkFunSX1509.h SparkFunSX1509.cpp -std=gnu++11 -lwiringPi -lpthread
 
 https://github.com/hoppler/SparkFun-SX1509
+
+pi@trackRC:~/LegoEcho/SparkFun-SX1509-master $ g++ -c sx1509_registers.h SparkFunSX1509.h SparkFunSX1509.cpp -std=gnu++11 -lwiringPi -lpthread
+
+ar rvs SparkFunSX1509.a SparkFunSX1509.o
+
+g++ main.cpp -o demo SparkFunSX1509.a -lwiringPi -lpthread -std=gnu++11
+
+
+https://github.com/topherCantrell/pi-io-expander
+
+pi@tink:~ $ i2cdetect -y 1
