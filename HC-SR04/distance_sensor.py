@@ -23,6 +23,11 @@ try:
 
       print "Calculating distance"
 
+
+      # The HC-SR04 sensor requires a short 10uS pulse to trigger the module, 
+      # which will cause the sensor to start the ranging program 
+      # (8 ultrasound bursts at 40 kHz) in order to obtain an echo response. 
+      # So, to create our trigger pulse, we set out trigger pin high for 10uS then set it low again.
       GPIO.output(PIN_TRIGGER, GPIO.HIGH)
 
       time.sleep(0.00001)
