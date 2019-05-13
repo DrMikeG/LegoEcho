@@ -1,9 +1,41 @@
 var canvas;
 var context;
+var control = { x: 0, y: 0, od: 50};
+
 var drawing = false;
 var mousePos = { x: 0, y: 0 };
 var lastPos = mousePos;
 
+var sweepAngle = 0;
+
+
+function drawTick(length, width, angle, colour) {
+
+    var rAngle = (angle / 360.0) * 2 * Math.PI;
+
+    context.beginPath();
+    // +Y is down the canvas?
+    var cosXStart = control.x + (control.od * Math.cos(rAngle));
+    var cosYStart = control.y - (control.od * Math.sin(rAngle));
+
+    var cosXEnd = control.x + ((control.od + length) * Math.cos(rAngle));
+    var cosYEnd = control.y - ((control.od + length) * Math.sin(rAngle));
+
+    context.moveTo(cosXStart, cosYStart);
+    context.lineTo(cosXEnd, cosYEnd);
+    context.strokeStyle = colour;
+    context.lineWidth = width;
+    context.closePath();
+    context.stroke();
+}
+
+function drawTicks() 
+{
+    for (var i = 0; i < 36; i++) {
+        var angle = i * 10;
+        drawTick(20, 3, angle, "#519b48");
+    }
+}
 
 function drawCircle(x, y, radius, border, border_colour, fill_colour) {
     context.beginPath();
@@ -16,32 +48,6 @@ function drawCircle(x, y, radius, border, border_colour, fill_colour) {
     context.stroke();
 }
 
-function drawTick(x, y, radiusStart, length, width, angle, colour) {
-
-    var rAngle = (angle / 360.0) * 2 * Math.PI;
-
-    context.beginPath();
-    // +Y is down the canvas?
-    var cosXStart = x + (radiusStart * Math.cos(rAngle));
-    var cosYStart = y - (radiusStart * Math.sin(rAngle));
-
-    var cosXEnd = x + ((radiusStart + length) * Math.cos(rAngle));
-    var cosYEnd = y - ((radiusStart + length) * Math.sin(rAngle));
-
-    context.moveTo(cosXStart, cosYStart);
-    context.lineTo(cosXEnd, cosYEnd);
-    context.strokeStyle = colour;
-    context.lineWidth = width;
-    context.closePath();
-    context.stroke();
-}
-function drawTicks(x, y, radiusStart) {
-    for (var i = 0; i < 36; i++) {
-        var angle = i * 10;
-        drawTick(x, y, radiusStart, 20, 3, angle, "#519b48");
-    }
-}
-
 function renderRing() {
 
     canvas.width = canvas.clientWidth;
@@ -52,18 +58,61 @@ function renderRing() {
     var width = canvas.width;
     var height = canvas.height;
 
-    var circle = {
-        x: width / 2,
-        y: height / 2,
-        od: (0.75 * width / 2)
-    };
+    control.x = width / 2;
+    control.y = height / 2;
+    control.od = (0.75 * width / 2);
 
     for (var i = 10; i > 0; i--) {
-        drawCircle(circle.x, circle.y, i * 0.1 * circle.od, 3, "#519b48", "#000000");
+        drawCircle(control.x, control.y, i * 0.1 * control.od, 3, "#519b48", "#000000");
     }
 
-    drawTicks(circle.x, circle.y, circle.od);
+    drawTicks();
 
+}
+
+function renderSweep() 
+{
+    var rAngleA = (sweepAngle / 360.0) * 2 * Math.PI;
+    var rAngleB = ((sweepAngle+20) / 360.0) * 2 * Math.PI;
+
+    context.beginPath();
+    
+    var cosXStart = control.x + (control.od * Math.cos(rAngleA));
+    var cosYStart = control.y - (control.od * Math.sin(rAngleA));
+
+    var cosXEnd = control.x + (control.od * Math.cos(rAngleB));
+    var cosYEnd = control.y - (control.od * Math.sin(rAngleB));
+
+    context.strokeStyle = "#FF0000";
+    context.arc(control.x, control.y, control.od, rAngleA, rAngleB);
+    context.lineTo(control.x, control.y);
+    context.closePath();
+    context.stroke();
+}
+
+function renderTouch()
+{
+    var touchSize = 50;
+    // is fully within ring?
+    if (drawing && isPositionWithinRing(mousePos, touchSize)) {
+        //console.log("Drawing circle at", mousePos);
+        drawCircle(mousePos.x, mousePos.y, 30, 3, "red", "#000000");
+    }
+}
+
+// Draw to the canvas
+function renderCanvas() 
+{
+
+    renderRing();
+
+    sweepAngle += 3;
+    if (sweepAngle > 360)
+        sweepAngle = 0;
+    renderSweep();
+
+    renderTouch();
+    
 }
 
 
@@ -103,20 +152,6 @@ function isPositionWithinRing(mousePos, touchSize) {
     return (dist + (0.5 * touchSize)) < circle.od;
 }
 
-
-// Draw to the canvas
-function renderCanvas() {
-
-    renderRing();
-
-    var touchSize = 50;
-    // is fully within ring?
-    if (drawing && isPositionWithinRing(mousePos, touchSize)) {
-        //console.log("Drawing circle at", mousePos);
-        drawCircle(mousePos.x, mousePos.y, 50, 3, "red", "#000000");
-    }
-
-}
 
 
 // Get a regular interval for drawing to the screen
@@ -191,7 +226,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         canvas.dispatchEvent(mouseEvent);
     }, false);
-
 
     (function drawLoop() {
         requestAnimFrame(drawLoop);
