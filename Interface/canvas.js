@@ -1,5 +1,9 @@
 var canvas;
 var context;
+var drawing = false;
+var mousePos = { x: 0, y: 0 };
+var lastPos = mousePos;
+
 
 function drawCircle(x, y, radius, border, border_colour, fill_colour) {
     context.beginPath();
@@ -36,7 +40,6 @@ function drawTicks(x, y, radiusStart) {
         var angle = i * 10;
         drawTick(x, y, radiusStart, 20, 3, angle, "#519b48");
     }
-
 }
 
 function renderRing() {
@@ -44,7 +47,6 @@ function renderRing() {
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
     
-
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     var width = canvas.width;
@@ -66,9 +68,6 @@ function renderRing() {
 
 
 // Set up mouse events for drawing
-var drawing = false;
-var mousePos = { x: 0, y: 0 };
-var lastPos = mousePos;
 
 // Get the position of a touch relative to the canvas
 function getTouchPos(touchEvent) {
@@ -99,7 +98,6 @@ function isPositionWithinRing(mousePos, touchSize) {
 
     var xDist = Math.abs(circle.x - mousePos.x);
     var yDist = Math.abs(circle.y - mousePos.y);
-
     var dist = Math.sqrt((xDist * xDist) + (yDist * yDist));
 
     return (dist + (0.5 * touchSize)) < circle.od;
@@ -113,12 +111,10 @@ function renderCanvas() {
 
     var touchSize = 50;
     // is fully within ring?
-    if (drawing && isPositionWithinRing(canvas, mousePos, touchSize)) {
-        var context = canvas.getContext("2d");
+    if (drawing && isPositionWithinRing(mousePos, touchSize)) {
         //console.log("Drawing circle at", mousePos);
-        drawCircle(context, mousePos.x, mousePos.y, 50, 3, "red", "#000000");
+        drawCircle(mousePos.x, mousePos.y, 50, 3, "red", "#000000");
     }
-
 
 }
 
