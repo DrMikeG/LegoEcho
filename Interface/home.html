@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="900" height="750" style="border:1px solid #519b48;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var width = c.width;
+var height = c.height;
+
+const circleCx = width/2;
+const circleCy = height/2
+const circleOD = (0.75*height/2);
+
+// concentric green circles
+for (var i=0; i < 10; i++)
+{
+    ctx.beginPath();
+    ctx.arc(circleCx, circleCy, i*0.1*circleOD, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.stroke();
+}
+
+
+/*
+ctx.arc(circleCx, circleCy, circleOD, 0, 2 * Math.PI);
+var grd = ctx.createRadialGradient(circleCx, circleCy, 0, circleCx, circleCy, circleOD);
+grd.addColorStop(0, "red");
+grd.addColorStop(1, "white");
+ctx.fillStyle = grd;
+ctx.fill();
+*/
+</script> 
+
+</body>
+</html>
