@@ -2,34 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Flask SocketIO Test</title>
+  <title>Drive Me Crazy</title>
+  <link rel='stylesheet' href='./static/custom.css'/>
+
 </head>
 <body>
-  <p>Some sample code to make sure Flask-SocketIO works...</p>
   <button onclick="driveFwd()">Drive</button>
   <button onclick="radar()">Radar</button>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
-    // verify our websocket connection is established
-    socket.on('connect', function() {
-        console.log('Websocket connected!');
-    });
+  <canvas id="html-canvas">
 
-    socket.on('radar', function(msg) {
-        console.log(msg.angle);
-    });
-    
-    function driveFwd() {
-      console.log('Drive FWD')
-      socket.emit('drive', {speed: 'really fast'});
-    }
-
-    function radar() {
-      console.log('radar')
-      socket.emit('radar', {});
-    }
-
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" src="./static/fl_sock.js"></script>
+    <script type="text/javascript" src="./static/canvas.js"></script>
+  
   </script>
 </body>
 </html>
