@@ -25,3 +25,7 @@ pip install flask
 
 run with 
 python hello.py
+
+adding sockets
+
+pip install flask-socketio eventlet
