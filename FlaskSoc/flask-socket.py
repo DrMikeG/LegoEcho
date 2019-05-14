@@ -12,13 +12,18 @@ def index():
     """Serve the index HTML"""
     return render_template('index.html')
 
-@socketio.on('create')
-def on_create(data):
-    """Create a game lobby"""
-    #room = 1
-    #ROOMS[room] = gm
-    #join_room(room)
-    emit('join_room', {'room': 'room'})
+@socketio.on('drive')
+def on_drive(data):
+    """Drive"""
+    print(data)
+
+@socketio.on('radar')
+def on_radar(data):
+    """Radar"""
+    for x in range(6):
+        emit('radar', {'angle': x})
+
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
