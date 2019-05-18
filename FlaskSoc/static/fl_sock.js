@@ -1,24 +1,39 @@
-var socket;
+var socketModule = (function(){
+    'use strict';
 
-(function connect() {
-    socket = io.connect('http://' + document.domain + ':' + location.port);
-    // verify our websocket connection is established
-})();
+    var socket;
 
-socket.on('connect', function() {
-    console.log('Websocket connected!');
-});
+    (function connect() {
+        socket = io.connect('http://' + document.domain + ':' + location.port);
+        // verify our websocket connection is established
+    })();
 
-socket.on('radar', function(msg) {
-    console.log(msg.angle);
-});
+    var loggingObject = console;
+    function GetLoggingObject(){ return loggingObject; }
+    function SetLoggingObject(obj) { loggingObject = obj; }
 
-function driveFwd() {
-  console.log('Drive FWD');
-  socket.emit('drive', {speed: 'really fast'});
-}
+    socket.on('connect', function() {
+        GetLoggingObject().log('Websocket connected!');
+    });
 
-function radar() {
-  console.log('radar');
-  socket.emit('radar', {});
-}
+    socket.on('radar', function(msg) {
+        GetLoggingObject().log(msg.angle);
+    });
+
+    function driveFwd() {
+        GetLoggingObject().log('Drive FWD');
+    socket.emit('drive', {speed: 'really fast'});
+    }
+
+    function radar() {
+        GetLoggingObject().log('radar');
+    socket.emit('radar', {});
+    }
+
+    return {
+        radar : radar,
+        driveFwd : driveFwd
+    };
+
+}());
+
