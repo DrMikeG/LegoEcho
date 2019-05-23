@@ -106,7 +106,7 @@ function renderCanvas()
 
     renderRing();
 
-    sweepAngle += 3;
+    sweepAngle += 1;
     if (sweepAngle > 360)
         sweepAngle = 0;
     renderSweep();
@@ -172,7 +172,7 @@ window.requestAnimFrame = (function (callback) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    canvas = document.getElementById("radar-canvas");
+    canvas = document.getElementById("radar-canvas1");
     context = canvas.getContext("2d");
 
     document.body.addEventListener("touchstart", function (e) {

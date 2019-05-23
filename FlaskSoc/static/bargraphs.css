@@ -1,0 +1,12 @@
+.bargraph-canvas {
+    height: 5vh;
+    width: 100vw;
+    /*position: absolute;*/
+    background-color: #000000;
+    margin: 0;
+    padding: 1;
+    display:block;
+    border-width: 5px;
+    border-color: #000000;
+    border-style : solid;
+  }
