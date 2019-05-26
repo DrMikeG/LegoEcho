@@ -45,10 +45,10 @@ class RangerObject:
                 value = round(distance, 2)
                 print "Distance:",value,"cm"
 
+def main():
+    ranger = RangerObject(23,24,True)
+    print ranger.getDistance()
+    del ranger
 
-ranger = RangerObject(23,24,True)
-
-print ranger.getDistance()
-
-del ranger
+if __name__ == '__main__':main()
 
