@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, join_room, emit
+from rangerObject import *
+
 #from codenames import game
 
 # initialize Flask
@@ -22,6 +24,9 @@ def on_radar(data):
     """Radar"""
     for x in range(6):
         emit('radar', {'angle': x})
+    ranger = RangerObject(23,24,True)
+    print ranger.getDistance()
+    del ranger
 
 
 
