@@ -29,3 +29,21 @@ python hello.py
 adding sockets
 
 pip install flask-socketio eventlet
+
+Setting this up on trackRC
+ssh pi@trackrc.local / trackRC
+
+Python and Pip were already installed.
+Installed 
+pip install virtualenv 
+pip install virtualenvwrapper
+Edited .bashrc
+
+
+You can make a list of installed packages inside the virtualenv:
+
+    $ pip freeze > requirements.txt
+    
+And install them on the destination virtualenv using:
+
+    $ pip install -r requirements.txt
