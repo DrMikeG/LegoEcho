@@ -94,9 +94,18 @@ function renderTouch()
 {
     var touchSize = 50;
     // is fully within ring?
-    if (drawing && isPositionWithinRing(mousePos, touchSize)) {
-        //console.log("Drawing circle at", mousePos);
-        drawCircle(mousePos.x, mousePos.y, 30, 3, "red", "#000000");
+    if (drawing ) {
+     
+        var toDraw = mousePos;
+        if (isPositionWithinRing(toDraw, touchSize))
+        {
+            drawCircle(toDraw.x, toDraw.y, 30, 3, "red", "#000000");
+        }
+        else
+        {    
+            projectPositionWithinRing(toDraw, touchSize);
+            drawCircle(toDraw.x, toDraw.y, 30, 3, "red", "#000000");
+        }
     }
 }
 
@@ -144,12 +153,38 @@ function isPositionWithinRing(mousePos, touchSize) {
         y: height / 2,
         od: (0.75 * width / 2)
     };
-
     var xDist = Math.abs(circle.x - mousePos.x);
     var yDist = Math.abs(circle.y - mousePos.y);
     var dist = Math.sqrt((xDist * xDist) + (yDist * yDist));
+   return (dist + (0.5 * touchSize)) < circle.od;
+}
 
-    return (dist + (0.5 * touchSize)) < circle.od;
+function projectPositionWithinRing(mousePos, touchSize) {
+    
+    // We are assuming that mousePos is not in the ring.
+    // Using similar triangles, we can scale the x and y to get to a point on the edge of the ring.
+
+    // 
+    var width = canvas.width;
+    var height = canvas.height;
+    var circle = {
+        x: width / 2,
+        y: height / 2,
+        od: (0.75 * width / 2)
+    };
+    var xDist = Math.abs(circle.x - mousePos.x);
+    var yDist = Math.abs(circle.y - mousePos.y);
+    var dist = Math.sqrt((xDist * xDist) + (yDist * yDist));
+    var distIncTouch = dist + (0.5 * touchSize);
+    // distIncTouch > circle.od
+    var scaleFactor = circle.od / distIncTouch;
+    var scaledXDist = xDist * scaleFactor;
+    var scaledYDist = yDist * scaleFactor;
+    
+    var xFactor = (circle.x - mousePos.x) > 0 ? -1 : 1;
+    var yFactor = (circle.y - mousePos.y) > 0 ? -1 : 1;
+    mousePos.x = (circle.x + (xFactor*scaledXDist));
+    mousePos.y = (circle.y + (yFactor*scaledYDist));
 }
 
 
@@ -194,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     canvas.addEventListener("mousedown", function (e) {
         drawing = true;
-        lastPos = getMousePos(e);
+        mousePos = getMousePos(e);
         //console.log("drawing at ", lastPos);
     }, false);
     canvas.addEventListener("mouseup", function (e) {
