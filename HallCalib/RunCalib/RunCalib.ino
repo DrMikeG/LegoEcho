@@ -1,7 +1,8 @@
 
- volatile byte half_revolutions;
+ volatile byte detections;
  unsigned int rpm;
  unsigned long timeold;
+ unsigned long timenew;
 
 // Motor control digital output pins defined as global constants (4 wheel drive with 2 Lego motors):
 const int controlPin1A = 2;                  // L293D driver input 1A on pin no 2  http://www.ti.com/lit/ds/symlink/l293.pdf connected to Arduino digital output pin 2
@@ -25,7 +26,7 @@ int motorDirection = 1;                      // Forward (1) or reverse (0)
 
    // Sensor reading interrupt  
    attachInterrupt(digitalPinToInterrupt(3), magnet_detect, RISING);//Initialize the intterrupt pin (Arduino digital pin 3)
-   half_revolutions = 0;
+   detections = 0;
    rpm = 0;
    timeold = 0;
 
@@ -34,7 +35,7 @@ int motorDirection = 1;                      // Forward (1) or reverse (0)
       Serial.print("Speed: ");Serial.println(pwmExpSpeed);
       const int trials = 2;
       for (int i=0; i < trials; i++){
-      unsigned int rpm = runExperiment(pwmExpSpeed,15);
+        unsigned int rpm = runExperiment(pwmExpSpeed,15);
         Serial.print("Trial: ");Serial.print(i);
         Serial.print(" PWM: ");Serial.print(pwmExpSpeed);
         Serial.print(" RPM: ");Serial.println(rpm);
@@ -54,36 +55,101 @@ unsigned int runExperiment(int pwmValue, int rotations)
     
     motorSpeed = pwmValue; // 0 to 255
     // motorSpeed = map(xValue,519,1023,0,255);
-    motorDirection = 0; 
-    Serial.println("Setup experiment");
-    Serial.println(motorSpeed);
+    motorDirection = 1; 
+    //Serial.println("Setup experiment");
+    //Serial.println(motorSpeed);
     SetMotorControl();        
     delay(100);
 
-    half_revolutions = 0;
-    timeold = millis();
+    long* trialTimes = new long[rotations]; 
 
-    int mod = 0;
-    while(half_revolutions < rotations)
-    {
-        mod++;
-        if (mod == 10000)
-        {
-          //Serial.println("Gather data...");
-          Serial.print(half_revolutions);
-          Serial.print(" ,");  
-          mod = 0;
-        }
+    // No detections
+    //Serial.println("Waiting for magnet 0 pass...");
+    detections = 0;
+    while (detections < 1) {
+      // wait for first detect to start experiment...
     }
     
-    rpm = (millis() - timeold);
-   
+    // detection is now equal to 1
+    //Serial.print("Detections: ");
+    //Serial.println(detections);
+    
+    timeold = millis();
+
+    for (int t=0; t < rotations; t++)
+    {
+        //Serial.print("Waiting for magnet pass ");
+        //Serial.println(t);
+        while(detections < (t+2))
+        { 
+          // wait for next detection
+        }
+        timenew = millis();
+        // calculate time
+        trialTimes[t] = timenew - timeold;
+        //Serial.print("Time: ");
+        //Serial.println(trialTimes[t]);
+        // swap times
+        timeold = timenew;
+    }
+
     motorSpeed = 0;
-    motorDirection = 0; 
-    Serial.println("Shutdown experiment");
+    motorDirection = 1; 
+    //Serial.println("Shutdown experiment");
     SetMotorControl();        
     delay(100);
-   // Serial.println(rpm,DEC);
+    
+    // We now have [rotations] times which should be similar... (although might contain double counting)
+
+    // Sort,
+    // Find the median, 
+    // Find the sum
+    // 
+
+    bubbleSort(trialTimes,rotations); // Using bubble sort offends me deeply.
+    
+    long median =trialTimes[rotations/2]; 
+    long sumValue = sum(trialTimes,rotations);
+
+    if (true)
+    {
+    Serial.println("");
+    Serial.print("Max Number: ");
+    Serial.print(trialTimes[rotations-1]);
+    Serial.println("");
+
+    Serial.print("Medium Number: ");
+    Serial.print(median);
+    Serial.println("");
+  
+    Serial.print("Min Number: ");
+    Serial.print(trialTimes[0]);
+    Serial.println("");
+
+    Serial.print("Sum: ");
+    Serial.print(sumValue);
+    Serial.println("");
+    }
+    // How many rotations do we think we have done?
+
+    float estRotations = sumValue / (float)median;
+    
+    float timeForRotation = sumValue / estRotations;    
+    
+    rpm = (unsigned int)(60000 / timeForRotation);
+
+    if (true)
+    {
+    Serial.print("Estimated rotations made: ");
+    Serial.println(estRotations);
+    
+    Serial.print("Estimate MS for one rotation: ");
+    Serial.println(timeForRotation);
+    Serial.print("Estimate rpm: ");
+    Serial.println(rpm);
+    }
+    
+    delete [] trialTimes;
     
     return rpm;
 }
@@ -91,8 +157,8 @@ unsigned int runExperiment(int pwmValue, int rotations)
 
  void magnet_detect()//This function is called whenever a magnet/interrupt is detected by the arduino
  {
-   half_revolutions++;
-   Serial.println("detect");
+   detections++;
+   //Serial.println("detect");
  }
 
 void SetMotorControl()
@@ -114,4 +180,24 @@ Motor speed:   PWM signal on EN1,2 (490 Hz; digital output value 0..255 for moto
        digitalWrite(controlPin2A, HIGH);
     } 
   analogWrite(ENablePin, motorSpeed);    //Speed   
+}
+
+long sum(long a[], int size) {
+  long sumValue = 0;
+  for(int i=0; i<(size-1); i++) {
+    sumValue += a[i];
+  }
+  return sumValue;
+}
+
+void bubbleSort(long a[], int size) {
+    for(int i=0; i<(size-1); i++) {
+        for(int o=0; o<(size-(i+1)); o++) {
+                if(a[o] > a[o+1]) {
+                    int t = a[o];
+                    a[o] = a[o+1];
+                    a[o+1] = t;
+                }
+        }
+    }
 }
