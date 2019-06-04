@@ -11,7 +11,7 @@ const int ENablePin = 9;                     // L293D ENable(1,2) input on pin n
 
 // Motor control global variables: 
 int motorSpeed = 0;                          // Motor speed 0..255
-int motorDirection = 1;                      // Forward (1) or reverse (0)
+int motorDirection = 0;                      // Forward (1) or reverse (0)
 
  void setup()
  {
@@ -30,7 +30,7 @@ int motorDirection = 1;                      // Forward (1) or reverse (0)
    rpm = 0;
    timeold = 0;
 
-    for (int pwmExpSpeed = 255; pwmExpSpeed > 100; pwmExpSpeed-=10)
+    for (int pwmExpSpeed = 255; pwmExpSpeed > 120; pwmExpSpeed-=10)
     {
       Serial.print("Speed: ");Serial.println(pwmExpSpeed);
       const int trials = 2;
@@ -55,7 +55,7 @@ unsigned int runExperiment(int pwmValue, int rotations)
     
     motorSpeed = pwmValue; // 0 to 255
     // motorSpeed = map(xValue,519,1023,0,255);
-    motorDirection = 1; 
+    motorDirection = 0; 
     //Serial.println("Setup experiment");
     //Serial.println(motorSpeed);
     SetMotorControl();        
@@ -94,7 +94,7 @@ unsigned int runExperiment(int pwmValue, int rotations)
     }
 
     motorSpeed = 0;
-    motorDirection = 1; 
+    motorDirection = 0; 
     //Serial.println("Shutdown experiment");
     SetMotorControl();        
     delay(100);
