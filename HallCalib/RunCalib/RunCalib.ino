@@ -5,13 +5,18 @@
  unsigned long timenew;
 
 // Motor control digital output pins defined as global constants (4 wheel drive with 2 Lego motors):
+//const int controlPin1A = 2;                  // L293D driver input 1A on pin no 2  http://www.ti.com/lit/ds/symlink/l293.pdf connected to Arduino digital output pin 2
+//const int controlPin2A = 5;                  // L293D driver input 2A on pin no 7 connected to Arduino digital output pin 5
+//const int ENablePin = 9;                     // L293D ENable(1,2) input on pin no 1 connected to Arduino digital output pin 9
+
 const int controlPin1A = 2;                  // L293D driver input 1A on pin no 2  http://www.ti.com/lit/ds/symlink/l293.pdf connected to Arduino digital output pin 2
 const int controlPin2A = 5;                  // L293D driver input 2A on pin no 7 connected to Arduino digital output pin 5
 const int ENablePin = 9;                     // L293D ENable(1,2) input on pin no 1 connected to Arduino digital output pin 9
 
+
 // Motor control global variables: 
 int motorSpeed = 0;                          // Motor speed 0..255
-int motorDirection = 0;                      // Forward (1) or reverse (0)
+int motorDirection = 1;                      // Forward (1) or reverse (0)
 
  void setup()
  {
@@ -26,7 +31,7 @@ int motorDirection = 0;                      // Forward (1) or reverse (0)
 
    // Sensor reading interrupt  
    attachInterrupt(digitalPinToInterrupt(3), magnet_detect, RISING);//Initialize the intterrupt pin (Arduino digital pin 3)
-   detections = 0;
+   detections = 1;
    rpm = 0;
    timeold = 0;
 
@@ -55,7 +60,7 @@ unsigned int runExperiment(int pwmValue, int rotations)
     
     motorSpeed = pwmValue; // 0 to 255
     // motorSpeed = map(xValue,519,1023,0,255);
-    motorDirection = 0; 
+    motorDirection = 1; 
     //Serial.println("Setup experiment");
     //Serial.println(motorSpeed);
     SetMotorControl();        

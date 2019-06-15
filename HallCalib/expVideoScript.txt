@@ -1,0 +1,64 @@
+So, you may have seen from my previous video, I'm hooking up some lego PF motoros to an L293D chip, and driving them from an arduino / raspberry pi.
+
+Well, I thought I would carry out a reasonably scientifc analysis of the PWM to speed curve for the motors.
+
+I've come to realise a number of reasons this experiment is floored, but I've learnt a few things.
+
+I can drive the motor in either direction, and I can set PWM duty circle to vary the speed - however the motors will stall below a certain threshold, (lets call that P0) and Have a maximum duty cicle, lets call that P1, and the variation in speed between P0 and P1 is likely to be some form of curve rather than a linear relationship.
+
+I setup this shaky looking rig, using the tracked buggy that I ultimately want to be controlling.
+
+There is an arduino setting different duty cycles, and measuring the track speed that results.
+
+The may I'm measuring the track speed is by sticking a magnet to the track, and running it beneath a hall effects sensor.
+The arduino measures each time the magnet passes - with about 95% reliability it turned out.
+
+
+I'll describe 4 experiments.
+
+Experiment 1:
+Started at full power 255
+10 point decrements
+At 95 it stalled and I pulled the power to put it out of its missery.
+
+2 trials at each power 
+Timed and counted 15 revolutions of the track.
+
+Repeated in the other direction.
+
+4:54sec for the first
+5 min for the second
+
+Shift-Command-4 to screenshot
+
+Looking at the data I noticed two things:
+
+I didn's start the track from the same point each time, so the time taken for the magnet to each the detector for the first rotation was variable, and as 1/15th of each experiment this made it very flaky.
+
+Also approximately counted the number of 1000s of idle cycles on the arduino between magnet detects.
+This was what alerted me to the fact I missed reading the magnet occasionally - effectively doubling the time to measure a single rotation.
+
+For experiment 2, I tweaked the code but kept the parameters largley the same.
+For each motor direction
+
+255 down to 105 in 10 unit decrements
+2 trials of each speed.
+Counted the times between 16 magnet passes.
+Sorted the 14 measurments. Took the median measurment as baseline
+Calculated how many revolutions had been done in the total amount of time taken.
+Averaged that to get the time for one revolution.
+
+13 power levels
+2 trials at each
+16 reads in each.
+2 directions
+832 reads, 8 of which were double revolutions.
+
+
+
+This allows me to discount when the magnet didn't read and we ended up with two revolution being timed as one, which happend about 8 times out of 
+
+
+
+Time fwd:  20:45:27  20:50:57
+Time backwards:  21:02:08 21:06:29
