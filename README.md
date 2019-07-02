@@ -62,3 +62,20 @@ Looking at the pinouts, I think
 
 I want to wire up and run one tread...
 
+Ok, so what voltage to put into the L293D from the pi?
+https://learn.adafruit.com/adafruit-raspberry-pi-lesson-9-controlling-a-dc-motor/lm293d
+
+This tutorial uses 5V to power the chip from the PI...
+It uses pin 18 for enable, and pins 4 and 17 for direction...
+I'll try this circuit if I can't make my own one work, but now I know to use 5V...
+The 5V chip power wires are bundled together, purple and green. Purple is ground.
+
+Orange wire is enable (pos 12)
+
+On the pi I am running ~\LegoEcho\PiDrive\driverObject.py - and nothing is happening.
+I have the control lines wired into what I think are pin positions:
+12,13 ans 15
+
+I wired up when I think are the three control line to what I think are the three pins I am controlling - and unsurprisingly, something that I think it wrong.
+
+Time for a break and to come back when I have had some sleep...
