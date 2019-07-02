@@ -1,3 +1,4 @@
+import time
 import RPi.GPIO as GPIO
 
 #const int controlPin1A = 2;                  // L293D driver input 1A on pin no 2  http://www.ti.com/lit/ds/symlink/l293.pdf connected to Arduino digital output pin 2
@@ -30,8 +31,8 @@ class DriverObject:
         def __init__(self,isStubbed=False):
             
             self.Enable_BCM = 12
-            self.Ctrl1A_BCM = 16
-            self.Ctrl1B_BCM = 20
+            self.Ctrl1A_BCM = 13
+            self.Ctrl1B_BCM = 15
             self.STUBBED = isStubbed
 
             if self.STUBBED == False:
@@ -40,11 +41,12 @@ class DriverObject:
                 GPIO.setup(self.Ctrl1A_BCM,GPIO.OUT)
                 GPIO.setup(self.Ctrl1B_BCM,GPIO.OUT)
                 #Setup PWM out:
-                self.pwm = GPIO.PWM(Enable_BCM, 490) # Initialize PWM on pwmPin 490Hz frequency
+                GPIO.setup(self.Enable_BCM, GPIO.OUT) # PWM pin set as output
+                self.pwm = GPIO.PWM(self.Enable_BCM, 490) # Initialize PWM on pwmPin 490Hz frequency
 
             #Enable_BCM = 12 
-            #Ctrl1A_BCM = 16
-            #Ctrl1B_BCM = 20
+            #Ctrl1A_BCM = 13
+            #Ctrl1B_BCM = 15
 
         def __del__(self):
             if (self.STUBBED==False):
@@ -61,7 +63,7 @@ class DriverObject:
                 self.pwm.start(100)      
                 time.sleep(5)
                 print "Stop!"
-                pwm.ChangeDutyCycle(0)                
+                self.pwm.ChangeDutyCycle(0)                
 
 
 def main():
