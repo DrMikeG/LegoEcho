@@ -1,3 +1,24 @@
+Started at full power 255
+10 point decrements
+At 95 it stalled and I pulled the power to put it out of its missery.
+
+2 trials at each power 
+Timed and counted 15 revolutions of the track.
+
+Repeated in the other direction.
+
+4:54sec
+5min
+
+
+I didn's start the track from the same point each time, so the time taken for the magnet to each the detector for the first rotation was variable, and as 1/15th of each experiment this made it very flaky.
+
+
+Also approximately counted the number of 1000s of idle cycles on the arduino between magnet detects.
+This was what alerted me to the fact I missed reading the magnet
+
+21:18:03 - 21:22:57 (4:54sec)
+
 21:18:03.071 -> Speed: 255
 21:18:03.071 -> Setup experiment
 21:18:03.071 -> 255

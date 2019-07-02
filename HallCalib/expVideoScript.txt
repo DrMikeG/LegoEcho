@@ -1,16 +1,12 @@
 So, you may have seen from my previous video, I'm hooking up some lego PF motoros to an L293D chip, and driving them from an arduino / raspberry pi.
 
-Well, I thought I would carry out a reasonably scientifc analysis of the PWM to speed curve for the motors.
-
+Well, I thought I would carry out a reasonably scientifc analysis of the relationship between PWM to speed for the motors.
 I've come to realise a number of reasons this experiment is floored, but I've learnt a few things.
 
-I can drive the motor in either direction, and I can set PWM duty circle to vary the speed - however the motors will stall below a certain threshold, (lets call that P0) and Have a maximum duty cicle, lets call that P1, and the variation in speed between P0 and P1 is likely to be some form of curve rather than a linear relationship.
-
-I setup this shaky looking rig, using the tracked buggy that I ultimately want to be controlling.
-
+I setup this shaky-looking rig, using the tracked buggy that I ultimately want to be controlling.
 There is an arduino setting different duty cycles, and measuring the track speed that results.
 
-The may I'm measuring the track speed is by sticking a magnet to the track, and running it beneath a hall effects sensor.
+I'm measuring the track speed is by sticking a magnet to the track, and running it beneath a hall effects sensor.
 The arduino measures each time the magnet passes - with about 95% reliability it turned out.
 
 
@@ -18,7 +14,7 @@ I'll describe 4 experiments.
 
 #EXP1
 
-Varied the power from 255 down to 95 in steps of 10 (it stalled at 95)
+Varied the p ower from 255 down to 95 in steps of 10 (it stalled at 95)
 
 2 trials at each power level
 Timed and counted 15 revolutions of the track.
@@ -41,7 +37,7 @@ For each motor direction
 2 trials of each speed.
 Counted the times between 16 magnet passes.
 Sorted the 14 measurments. Took the median measurment as baseline
-Calculated how many revolutions had been done in the total amount of time taken.
+Calcu lated how many revolutions had been done in the total amount of time taken.
 Averaged that to get the time for one revolution.
 
 
