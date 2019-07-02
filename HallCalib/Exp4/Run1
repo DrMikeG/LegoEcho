@@ -1,0 +1,185 @@
+Direction 0
+
+18:32:20.977 -> Speed: 255
+18:32:22.447 -> Speed: 255
+18:32:34.115 -> 
+18:32:34.115 -> Max Number: 1254
+18:32:34.115 -> Medium Number: 628
+18:32:34.150 -> Min Number: 524
+18:32:34.150 -> Sum: 9795
+18:32:34.187 -> Estimated rotations made: 15.60
+18:32:34.225 -> Estimate MS for one rotation: 628.00
+18:32:34.225 -> Estimate rpm: 95
+18:32:34.225 -> Trial: 0 PWM: 255 RPM: 95
+18:32:46.834 -> 
+18:32:46.834 -> Max Number: 2216
+18:32:46.834 -> Medium Number: 548
+18:32:46.868 -> Min Number: 513
+18:32:46.868 -> Sum: 9774
+18:32:46.906 -> Estimated rotations made: 17.84
+18:32:46.940 -> Estimate MS for one rotation: 548.00
+18:32:46.973 -> Estimate rpm: 109
+18:32:46.973 -> Trial: 1 PWM: 255 RPM: 109
+18:32:47.006 -> Speed: 245
+18:32:56.752 -> 
+18:32:56.752 -> Max Number: 1098
+18:32:56.752 -> Medium Number: 538
+18:32:56.752 -> Min Number: 528
+18:32:56.752 -> Sum: 8041
+18:32:56.786 -> Estimated rotations made: 14.95
+18:32:56.821 -> Estimate MS for one rotation: 538.00
+18:32:56.858 -> Estimate rpm: 111
+18:32:56.858 -> Trial: 0 PWM: 245 RPM: 111
+18:33:09.143 -> 
+18:33:09.143 -> Max Number: 1578
+18:33:09.143 -> Medium Number: 539
+18:33:09.180 -> Min Number: 524
+18:33:09.180 -> Sum: 9580
+18:33:09.215 -> Estimated rotations made: 17.77
+18:33:09.248 -> Estimate MS for one rotation: 539.00
+18:33:09.282 -> Estimate rpm: 111
+18:33:09.282 -> Trial: 1 PWM: 245 RPM: 111
+18:33:09.315 -> Speed: 235
+18:33:20.121 -> 
+18:33:20.121 -> Max Number: 1072
+18:33:20.121 -> Medium Number: 539
+18:33:20.155 -> Min Number: 533
+18:33:20.155 -> Sum: 8601
+18:33:20.193 -> Estimated rotations made: 15.96
+18:33:20.229 -> Estimate MS for one rotation: 539.00
+18:33:20.229 -> Estimate rpm: 111
+18:33:20.229 -> Trial: 0 PWM: 235 RPM: 111
+18:33:27.317 -> Speed: 255
+18:33:36.584 -> 
+18:33:36.584 -> Max Number: 1542
+18:33:36.584 -> Medium Number: 509
+18:33:36.621 -> Min Number: 501
+18:33:36.621 -> Sum: 7158
+18:33:36.655 -> Estimated rotations made: 14.06
+18:33:36.655 -> Estimate MS for one rotation: 509.00
+18:33:36.693 -> Estimate rpm: 117
+18:33:36.693 -> Trial: 0 PWM: 255 RPM: 117
+18:33:44.799 -> 
+18:33:44.799 -> Max Number: 510
+18:33:44.799 -> Medium Number: 500
+18:33:44.832 -> Min Number: 493
+18:33:44.832 -> Sum: 7005
+18:33:44.866 -> Estimated rotations made: 14.01
+18:33:44.901 -> Estimate MS for one rotation: 500.00
+18:33:44.901 -> Estimate rpm: 120
+18:33:44.901 -> Trial: 1 PWM: 255 RPM: 120
+18:33:44.937 -> Speed: 245
+18:33:53.389 -> 
+18:33:53.389 -> Max Number: 543
+18:33:53.389 -> Medium Number: 524
+18:33:53.427 -> Min Number: 519
+18:33:53.427 -> Sum: 7355
+18:33:53.463 -> Estimated rotations made: 14.04
+18:33:53.496 -> Estimate MS for one rotation: 524.00
+18:33:53.530 -> Estimate rpm: 114
+18:33:53.530 -> Trial: 0 PWM: 245 RPM: 114
+18:34:01.916 -> 
+18:34:01.916 -> Max Number: 530
+18:34:01.916 -> Medium Number: 521
+18:34:01.954 -> Min Number: 513
+18:34:01.954 -> Sum: 7258
+18:34:01.988 -> Estimated rotations made: 13.93
+18:34:02.025 -> Estimate MS for one rotation: 521.00
+18:34:02.059 -> Estimate rpm: 115
+18:34:02.059 -> Trial: 1 PWM: 245 RPM: 115
+18:34:02.097 -> Speed: 235
+18:34:10.611 -> 
+18:34:10.611 -> Max Number: 542
+18:34:10.611 -> Medium Number: 530
+18:34:10.611 -> Min Number: 521
+18:34:10.611 -> Sum: 7418
+18:34:10.646 -> Estimated rotations made: 14.00
+18:34:10.683 -> Estimate MS for one rotation: 530.00
+18:34:10.718 -> Estimate rpm: 113
+18:34:10.718 -> Trial: 0 PWM: 235 RPM: 113
+18:34:19.393 -> 
+18:34:19.393 -> Max Number: 609
+18:34:19.393 -> Medium Number: 530
+18:34:19.428 -> Min Number: 527
+18:34:19.428 -> Sum: 7486
+18:34:19.463 -> Estimated rotations made: 14.12
+18:34:19.498 -> Estimate MS for one rotation: 530.00
+18:34:19.535 -> Estimate rpm: 113
+18:34:19.535 -> Trial: 1 PWM: 235 RPM: 113
+18:34:19.571 -> Speed: 225
+18:34:30.938 -> 
+18:34:30.938 -> Max Number: 860
+18:34:30.938 -> Medium Number: 680
+18:34:30.975 -> Min Number: 624
+18:34:30.975 -> Sum: 9860
+18:34:31.009 -> Estimated rotations made: 14.50
+18:34:31.044 -> Estimate MS for one rotation: 680.00
+18:34:31.081 -> Estimate rpm: 88
+18:34:31.081 -> Trial: 0 PWM: 225 RPM: 88
+18:35:01.097 -> 
+18:35:01.097 -> Max Number: 3095
+18:35:01.097 -> Medium Number: 2023
+18:35:01.134 -> Min Number: 755
+18:35:01.134 -> Sum: 26255
+18:35:01.171 -> Estimated rotations made: 12.98
+18:35:01.206 -> Estimate MS for one rotation: 2023.00
+18:35:01.243 -> Estimate rpm: 29
+18:35:01.278 -> Trial: 1 PWM: 225 RPM: 29
+18:35:01.278 -> Speed: 215
+18:35:42.959 -> 
+18:35:42.959 -> Max Number: 6593
+18:35:42.959 -> Medium Number: 1910
+18:35:42.994 -> Min Number: 1292
+18:35:42.994 -> Sum: 34302
+18:35:43.028 -> Estimated rotations made: 17.96
+18:35:43.066 -> Estimate MS for one rotation: 1910.00
+18:35:43.102 -> Estimate rpm: 31
+18:35:43.137 -> Trial: 0 PWM: 215 RPM: 31
+18:36:05.359 -> 
+18:36:05.359 -> Max Number: 4475
+18:36:05.359 -> Medium Number: 1140
+18:36:05.393 -> Min Number: 627
+18:36:05.393 -> Sum: 17021
+18:36:05.430 -> Estimated rotations made: 14.93
+18:36:05.430 -> Estimate MS for one rotation: 1140.00
+18:36:05.464 -> Estimate rpm: 52
+18:36:05.498 -> Trial: 1 PWM: 215 RPM: 52
+18:36:05.498 -> Speed: 205
+18:36:18.147 -> 
+18:36:18.147 -> Max Number: 1207
+18:36:18.147 -> Medium Number: 783
+18:36:18.182 -> Min Number: 609
+18:36:18.182 -> Sum: 10629
+18:36:18.217 -> Estimated rotations made: 13.57
+18:36:18.255 -> Estimate MS for one rotation: 783.00
+18:36:18.292 -> Estimate rpm: 76
+18:36:18.292 -> Trial: 0 PWM: 205 RPM: 76
+18:36:39.811 -> 
+18:36:39.811 -> Max Number: 6986
+18:36:39.811 -> Medium Number: 1018
+18:36:39.811 -> Min Number: 616
+18:36:39.811 -> Sum: 13864
+18:36:39.846 -> Estimated rotations made: 13.62
+18:36:39.880 -> Estimate MS for one rotation: 1018.00
+18:36:39.917 -> Estimate rpm: 58
+18:36:39.950 -> Trial: 1 PWM: 205 RPM: 58
+18:36:39.950 -> Speed: 195
+18:36:58.298 -> 
+18:36:58.298 -> Max Number: 2043
+18:36:58.298 -> Medium Number: 1075
+18:36:58.335 -> Min Number: 689
+18:36:58.335 -> Sum: 15534
+18:36:58.369 -> Estimated rotations made: 14.45
+18:36:58.404 -> Estimate MS for one rotation: 1075.00
+18:36:58.440 -> Estimate rpm: 55
+18:36:58.512 -> Trial: 0 PWM: 195 RPM: 55
+18:37:52.889 -> 
+18:37:52.889 -> Max Number: 33517
+18:37:52.889 -> Medium Number: 629
+18:37:52.889 -> Min Number: 619
+18:37:52.889 -> Sum: 20218
+18:37:52.926 -> Estimated rotations made: 32.14
+18:37:52.963 -> Estimate MS for one rotation: 629.00
+18:37:52.997 -> Estimate rpm: 95
+18:37:52.997 -> Trial: 1 PWM: 195 RPM: 95
+18:37:53.031 -> Speed: 185

@@ -1,0 +1,81 @@
+So, you may have seen from my previous video, I'm hooking up some lego PF motoros to an L293D chip, and driving them from an arduino / raspberry pi.
+
+Well, I thought I would carry out a reasonably scientifc analysis of the PWM to speed curve for the motors.
+
+I've come to realise a number of reasons this experiment is floored, but I've learnt a few things.
+
+I can drive the motor in either direction, and I can set PWM duty circle to vary the speed - however the motors will stall below a certain threshold, (lets call that P0) and Have a maximum duty cicle, lets call that P1, and the variation in speed between P0 and P1 is likely to be some form of curve rather than a linear relationship.
+
+I setup this shaky looking rig, using the tracked buggy that I ultimately want to be controlling.
+
+There is an arduino setting different duty cycles, and measuring the track speed that results.
+
+The may I'm measuring the track speed is by sticking a magnet to the track, and running it beneath a hall effects sensor.
+The arduino measures each time the magnet passes - with about 95% reliability it turned out.
+
+
+I'll describe 4 experiments.
+
+#EXP1
+
+Varied the power from 255 down to 95 in steps of 10 (it stalled at 95)
+
+2 trials at each power level
+Timed and counted 15 revolutions of the track.
+
+Repeated then entire test with the motor (and track) running in the other direction.
+
+Looking at the data I noticed two things:
+
+I didn's start the track from the same point each time, so the time taken for the magnet to each the detector for the first rotation was variable, and as 1/15th of each experiment this made it very flaky.
+
+Also approximately counted the number of 1000s of idle cycles on the arduino between magnet detects.
+This was what alerted me to the fact I missed reading the magnet occasionally - effectively doubling the time to measure a single rotation.
+
+#EXP2
+
+For experiment 2, I tweaked the code but kept the parameters largley the same.
+For each motor direction
+
+255 down to 105 in 10 unit decrements
+2 trials of each speed.
+Counted the times between 16 magnet passes.
+Sorted the 14 measurments. Took the median measurment as baseline
+Calculated how many revolutions had been done in the total amount of time taken.
+Averaged that to get the time for one revolution.
+
+
+This allows me to discount when the magnet didn't read and we ended up with two revolution being timed as one, which happend about 8 times out of 832 times. 
+
+13 power levels
+2 trials at each
+16 reads in each.
+2 directions
+
+Data started to look a bit weird towards then end. It stalled out at 135 for run 2.
+
+The link for the second run is clearly below the first.
+I couldn't tell from this if the motor ran slower in one direction, or the track was harder to drive on one direction, or if the battery pack was running out of juice on the second run. 
+
+#EXP3
+
+I rigged up a power supply at 10V.
+
+Ran it a third time with the same parameters.
+
+Full power had dropped from 140 and 130 in EXP2 to 120 and then 90. The stall power was up to 145.
+
+I wonderined if the power supply couldn't provide the required voltage, so I switch back to the batteries.
+
+My conclusion is, that I've destroyed the motor.
+
+How long was it running for?
+21:18:03 - 21:22:57     4:54
+21:37:38 - 21:42:38     5:0
+21:02:08 - 21:06:29     4:21
+20:45:27 - 20:50:57     5:30
+18:11:15 - 18:16:57     5:42
+18:19:16 - 18:23:43     4:27
+
+29:54min in experiments (plus time spent check the experiment setup)
+

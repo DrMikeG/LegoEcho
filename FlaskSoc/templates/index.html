@@ -4,18 +4,21 @@
   <meta charset="UTF-8">
   <title>Drive Me Crazy</title>
   <link rel='stylesheet' href='./static/custom.css'/>
-
+  <link rel='stylesheet' href='./static/radar.css'/>
+  <link rel='stylesheet' href='./static/bargraphs.css'/>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+  <script type="text/javascript" src="./static/fl_sock.js"></script>
+  <script type="text/javascript" src="./static/radar.js"></script>
+  <!--script type="text/javascript" src="./static/bargraphs.js"></script-->
 </head>
 <body>
-  <button onclick="socketModule.driveFwd()">Drive</button>
-  <button onclick="socketModule.radar()">Radar</button>
-  <canvas id="radar-canvas">
-    
-
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script type="text/javascript" src="./static/fl_sock.js"></script>
-    <script type="text/javascript" src="./static/radar-canvas.js"></script>
+  <div id="control-div">
+  <button class="drive-button" onclick="socketModule.driveFwd()">Drive</button>
+  <button class="drive-button" onclick="socketModule.radar()">Radar</button>
+</div>
+  <canvas id="radar-canvas1"></canvas >
+  <canvas id="bargraph-canvas1" class="bargraph-canvas"></canvas>
+  <!--canvas id="bargraph-canvas2" class="bargraph-canvas"></canvas-->
   
-  </script>
 </body>
 </html>
