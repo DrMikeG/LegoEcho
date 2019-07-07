@@ -93,3 +93,9 @@ And that lights up.
 
 Made new test python ledFlash.py
 Which should flash BCM pin 12 (GPIO 18) which I think it PWM...
+
+Ok, even simpler, blink.py blinks an LED on pin 17
+https://thepihut.com/blogs/raspberry-pi-tutorials/gpio-and-python-39-blinking-led
+
+PWM for LED blink: https://electronicshobbyists.com/raspberry-pi-pwm-tutorial-control-brightness-of-led-and-servo-motor/
+

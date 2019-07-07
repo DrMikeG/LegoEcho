@@ -1,34 +1,21 @@
-#!/usr/bin/python
-
-from time import sleep # import the time function from the sleep library
-import RPi.GPIO as GPIO # import our GPIO library
-
-GPIO.setmode(GPIO.BCM) # set the board numbering system to BCM
-
-# setup our output pins
-GPIO.setup(17,GPIO.OUT)
-GPIO.setup(27,GPIO.OUT)
-
-# Turn LEDs on
-print "lights on"
-GPIO.output(17,GPIO.HIGH)
-GPIO.output(27,GPIO.HIGH)
-sleep(1) # sleep for 1 second
-
-# Turn LEDs off
-print "lights off" 
-GPIO.output(17,GPIO.LOW)
-GPIO.output(27,GPIO.LOW)
-sleep(1)
-
-# Turn LEDs on
-print "lights on"
-GPIO.output(17,GPIO.HIGH)
-GPIO.output(27,GPIO.HIGH) 
-sleep(1)
-
-# Turn LEDs off
-print "lights off"
-GPIO.output(17,GPIO.LOW)
-GPIO.output(27,GPIO.LOW)
-GPIO.cleanup() # the clean-up function
+import RPi.GPIO as GPIO     # Importing RPi library to use the GPIO pins
+from time import sleep  # Importing sleep from time library
+led_pin = 21            # Initializing the GPIO pin 21 for LED
+GPIO.setmode(GPIO.BCM)          # We are using the BCM pin numbering
+GPIO.setup(led_pin, GPIO.OUT)   # Declaring pin 21 as output pin
+pwm = GPIO.PWM(led_pin, 100)    # Created a PWM object
+pwm.start(0)                    # Started PWM at 0% duty cycle
+try:
+    while 1:                    # Loop will run forever
+        for x in range(100):    # This Loop will run 100 times
+            pwm.ChangeDutyCycle(x) # Change duty cycle
+            sleep(0.01)         # Delay of 10mS
+            
+        for x in range(100,0,-1): # Loop will run 100 times; 100 to 0
+            pwm.ChangeDutyCycle(x)
+            sleep(0.01)
+# If keyboard Interrupt (CTRL-C) is pressed
+except KeyboardInterrupt:
+    pass        # Go to next line
+pwm.stop()      # Stop the PWM
+GPIO.cleanup()  # Make all the output pins LOW
