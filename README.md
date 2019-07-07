@@ -99,3 +99,7 @@ https://thepihut.com/blogs/raspberry-pi-tutorials/gpio-and-python-39-blinking-le
 
 PWM for LED blink: https://electronicshobbyists.com/raspberry-pi-pwm-tutorial-control-brightness-of-led-and-servo-motor/
 
+blink.py can control PWM on GPIO21 (pin 40)
+
+https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
+RPI GPIO support software PWM on any output
