@@ -79,3 +79,17 @@ I have the control lines wired into what I think are pin positions:
 I wired up when I think are the three control line to what I think are the three pins I am controlling - and unsurprisingly, something that I think it wrong.
 
 Time for a break and to come back when I have had some sleep...
+
+# 2019_07_07 
+
+Ok, took a break on this to work on my ESP8266 project, but paused that now.
+
+![](/readme_img/PiZeroPinOut.png)
+
+Wasn't having any luck driving the motor from the pi. Lets get more simple and just flash an LED.
+
+OK, so hooked LED up to pins 1 and 9 (3.3V and gnd)
+And that lights up.
+
+Made new test python ledFlash.py
+Which should flash BCM pin 12 (GPIO 18) which I think it PWM...
