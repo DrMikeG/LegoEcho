@@ -43,13 +43,12 @@ class DriverObject:
             # fade in from min to max in increments of 5 points:
             print "FLASHING for 5 seconds"
             self.pwm.start(0)    
-            for (int fadeValue = 0 ; fadeValue <= 255; fadeValue += 5) {
-            # sets the value (range from 0 to 255):
-            #analogWrite(ledPin, fadeValue);
-            self.pwm.ChangeDutyCycle(fadeValue)                
-            # wait for 30 milliseconds to see the dimming effect
-            delay(30);
-            }
+            for fadeValue in range(0,255,5)
+                # sets the value (range from 0 to 255):
+                #analogWrite(ledPin, fadeValue);
+                self.pwm.ChangeDutyCycle(fadeValue)                
+                # wait for 30 milliseconds to see the dimming effect
+                time.sleep(0.030)
             print "Stop!"
             
 
