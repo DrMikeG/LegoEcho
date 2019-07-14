@@ -30,27 +30,35 @@ import RPi.GPIO as GPIO
 class DriverObject:
         def __init__(self,isStubbed=False):
             
-            self.Enable_BCM = 12
+            self.Enable_BCM = 21
             GPIO.setmode(GPIO.BCM)
             #Setup PWM out:
             GPIO.setup(self.Enable_BCM, GPIO.OUT) # PWM pin set as output
-            self.pwm = GPIO.PWM(self.Enable_BCM, 490) # Initialize PWM on pwmPin 490Hz frequency
+            self.pwm = GPIO.PWM(self.Enable_BCM, 100) # Initialize PWM on pwmPin 490Hz frequency
 
         def __del__(self):
                 GPIO.cleanup()
 
         def driveForFive(self):
-            # fade in from min to max in increments of 5 points:
-            print "FLASHING for 5 seconds"
-            self.pwm.start(0)    
-            for fadeValue in range(0,255,5):
-                # sets the value (range from 0 to 255):
-                #analogWrite(ledPin, fadeValue);
-                self.pwm.ChangeDutyCycle(fadeValue)                
-                # wait for 30 milliseconds to see the dimming effect
-                time.sleep(0.030)
-            print "Stop!"
+            try:
+                # fade in from min to max in increments of 5 points:
+                print "FLASHING for 5 seconds"
+                self.pwm.start(0)
+                while 1:                    # Loop will run forever
+                    for x in range(100):    # This Loop will run 100 times
+                        self.pwm.ChangeDutyCycle(x) # Change duty cycle
+                        sleep(0.01)         # Delay of 10mS
+                
+                    for x in range(100,0,-1): # Loop will run 100 times; 100 to 0
+                        self.pwm.ChangeDutyCycle(x)
+                        sleep(0.01)
+
+                print "Stop!"
             
+            except KeyboardInterrupt:
+                pass        # Go to next line
+            pwm.stop()      # Stop the PWM
+            GPIO.cleanup()  # Make all the output pins LOW
 
 def main():
     ranger = DriverObject(False)
