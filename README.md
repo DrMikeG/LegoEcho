@@ -103,3 +103,15 @@ blink.py can control PWM on GPIO21 (pin 40)
 
 https://raspi.tv/2013/rpi-gpio-0-5-2a-now-has-software-pwm-how-to-use-it
 RPI GPIO support software PWM on any output
+
+# 2019_07_14 
+
+Having had success with PWM in blink.py, moved useful code into ledFlash.py
+Got the LED flashing.
+Now trying to get the motor moving for one track at 100%
+
+I'm using GPIO 21,20,16, which are the far pins on the outside. I had 21 (pin 40) working for the LED.
+GPIO 21 will be my enable pin (PWM)
+The track I'm trying has three wires Purple, Blue, Green.
+I think Green is enable, and runs to chip 1 (enable)
+I think blue runs to chip 2 (enable 1a) and purple runs to chip 7 (enable 2a)

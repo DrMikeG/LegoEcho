@@ -47,8 +47,8 @@ class DriverObject:
             try:
                 # fade in from min to max in increments of 5 points:
                 print "FLASHING for 5 seconds"
-                GPIO.output(self.controlPin1A,GPIO.HIGH)
-                GPIO.output(self.controlPin2A,GPIO.LOW)
+                #GPIO.output(self.controlPin1A,GPIO.HIGH)
+                #GPIO.output(self.controlPin2A,GPIO.LOW)
                 self.pwm.start(0)
                 self.pwm.ChangeDutyCycle(99)
             
