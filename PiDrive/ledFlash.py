@@ -38,7 +38,7 @@ class DriverObject:
             GPIO.setup(self.Enable_BCM, GPIO.OUT) # PWM pin set as output
             GPIO.setup(self.controlPin1A, GPIO.OUT)   # Declaring pin 20 as output pin
             GPIO.setup(self.controlPin2A, GPIO.OUT)   # Declaring pin 16 as output pin
-            self.pwm = GPIO.PWM(self.Enable_BCM, 100) # Initialize PWM on pwmPin 490Hz frequency
+            self.pwm = GPIO.PWM(self.Enable_BCM, 490) # Initialize PWM on pwmPin 490Hz frequency
 
         def __del__(self):
                 GPIO.cleanup()
@@ -46,13 +46,15 @@ class DriverObject:
         def driveForFive(self):
             self.pwm.start(0)
             try:
-                # fade in from min to max in increments of 5 points:
-                print "FLASHING for 5 seconds"
-                #GPIO.output(self.controlPin1A,GPIO.HIGH)
-                #GPIO.output(self.controlPin2A,GPIO.LOW)
-                
+		# fade in from min to max in increments of 5 points:
+        	print "FLASHING for 5 seconds"
+                GPIO.output(self.controlPin1A,GPIO.HIGH)
+                GPIO.output(self.controlPin2A,GPIO.LOW)
+                print "attempting to set duty cycle"
                 self.pwm.ChangeDutyCycle(99)
-            
+		while 1:
+			time.sleep(50)
+
             except KeyboardInterrupt:
                 pass        # Go to next line
             self.pwm.stop()      # Stop the PWM
