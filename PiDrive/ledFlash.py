@@ -47,11 +47,11 @@ class DriverObject:
                 while 1:                    # Loop will run forever
                     for x in range(100):    # This Loop will run 100 times
                         self.pwm.ChangeDutyCycle(x) # Change duty cycle
-                        sleep(0.01)         # Delay of 10mS
+                        time.sleep(0.01)         # Delay of 10mS
                 
                     for x in range(100,0,-1): # Loop will run 100 times; 100 to 0
                         self.pwm.ChangeDutyCycle(x)
-                        sleep(0.01)
+                        time.sleep(0.01)
 
                 print "Stop!"
             
