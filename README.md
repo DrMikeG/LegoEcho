@@ -115,3 +115,7 @@ GPIO 21 will be my enable pin (PWM)
 The track I'm trying has three wires Purple, Blue, Green.
 I think Green is enable, and runs to chip 1 (enable)
 I think blue runs to chip 2 (enable 1a) and purple runs to chip 7 (enable 2a)
+
+So, I was forgetting to power the chip as well.
+3.3V to Green chip lead, gnd to purple cheap lead, and the track moved
+
