@@ -31,9 +31,13 @@ class DriverObject:
         def __init__(self,isStubbed=False):
             
             self.Enable_BCM = 21
+            self.controlPin1A = 20
+            self.controlPin2A = 16
             GPIO.setmode(GPIO.BCM)
             #Setup PWM out:
             GPIO.setup(self.Enable_BCM, GPIO.OUT) # PWM pin set as output
+            GPIO.setup(self.controlPin1A, GPIO.OUT)   # Declaring pin 20 as output pin
+            GPIO.setup(self.controlPin2A, GPIO.OUT)   # Declaring pin 16 as output pin
             self.pwm = GPIO.PWM(self.Enable_BCM, 100) # Initialize PWM on pwmPin 490Hz frequency
 
         def __del__(self):
@@ -43,21 +47,14 @@ class DriverObject:
             try:
                 # fade in from min to max in increments of 5 points:
                 print "FLASHING for 5 seconds"
+                GPIO.output(self.controlPin1A,GPIO.HIGH)
+                GPIO.output(self.controlPin2A,GPIO.LOW)
                 self.pwm.start(0)
-                while 1:                    # Loop will run forever
-                    for x in range(100):    # This Loop will run 100 times
-                        self.pwm.ChangeDutyCycle(x) # Change duty cycle
-                        time.sleep(0.01)         # Delay of 10mS
-                
-                    for x in range(100,0,-1): # Loop will run 100 times; 100 to 0
-                        self.pwm.ChangeDutyCycle(x)
-                        time.sleep(0.01)
-
-                print "Stop!"
+                self.pwm.ChangeDutyCycle(99)
             
             except KeyboardInterrupt:
                 pass        # Go to next line
-            pwm.stop()      # Stop the PWM
+            self.pwm.stop()      # Stop the PWM
             GPIO.cleanup()  # Make all the output pins LOW
 
 def main():
