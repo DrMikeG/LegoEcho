@@ -119,3 +119,14 @@ I think blue runs to chip 2 (enable 1a) and purple runs to chip 7 (enable 2a)
 So, I was forgetting to power the chip as well.
 3.3V to Green chip lead, gnd to purple cheap lead, and the track moved
 
+# 2019_07_15 
+
+I want a better way of editing on the pi. Nano sucks over ssh.
+
+https://www.hanselman.com/blog/VisualStudioCodeRemoteDevelopmentOverSSHToARaspberryPiIsButter.aspx
+
+first step is passwordless ssh
+
+https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md
+
+just ssh-copy-id pi@trackRC.local to copy my existing key to pi.
