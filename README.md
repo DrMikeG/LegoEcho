@@ -130,3 +130,35 @@ first step is passwordless ssh
 https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md
 
 just ssh-copy-id pi@trackRC.local to copy my existing key to pi.
+
+# 2019_08_14
+
+Running trackRC pi off tiny battery pack. Couldn't find it on the network.
+Installing 
+`sudo apt-get install samba winbind`
+
+Turns out the problem is my laptop not having bonjour (e.g from iTunes) installed
+
+What version of python should I be using?
+What version is currently installed and being used on the pi?
+
+```
+pi@trackRC:~/LegoEcho/HC-SR04 $ python range.py
+Distance Measurement In Progress
+Waiting For Sensor To Settle
+Distance: 16.46 cm
+pi@trackRC:~/LegoEcho/HC-SR04 $ python --version
+Python 2.7.13
+```
+
+```
+pi@trackRC:~/LegoEcho/HC-SR04 $ python3 --version
+Python 3.5.3
+pi@trackRC:~/LegoEcho/HC-SR04 $ python3 range
+python3: can't open file 'range': [Errno 2] No such file or directory
+pi@trackRC:~/LegoEcho/HC-SR04 $ python3 range.py
+  File "range.py", line 12
+    print "Distance Measurement In Progress"
+                                           ^
+SyntaxError: Missing parentheses in call to 'print'
+```
