@@ -1,7 +1,8 @@
 import unittest
 import sys
-sys.path.insert(0,'..')
-import RangerObject
+sys.path.append("..") # Adds higher directory to python modules path.
+
+from FlaskSoc import RangerObject 
 
 class TestRangerObject(unittest.TestCase):
 

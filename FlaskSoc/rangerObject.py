@@ -1,6 +1,10 @@
-import RPi.GPIO as GPIO
 import time
 import random
+
+try:
+    import RPi.GPIO as GPIOInterface
+except ImportError:
+    import StubGPIO as GPIOInterface
 
 class RangerObject:
         def __init__(self,trigPinBCM=None,echoPinBMC=None,isStubbed=False):
