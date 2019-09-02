@@ -1,5 +1,7 @@
 import unittest
-from rangerObject.py import RangerObject
+import sys
+sys.path.insert(0,'..')
+import RangerObject
 
 class TestRangerObject(unittest.TestCase):
 

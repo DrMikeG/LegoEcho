@@ -25,3 +25,17 @@ First - used ky-003 test sketch for simple magnet magnet_detect
 Second used ArduinoHallEffect test sketch to test RPM calculation with digital interrupt
 
 Third, need to drive the track again..
+
+
+https://www.youtube.com/watch?v=hfBXRgUKqtc
+
+I could just have watched this video here, which uses a multimeter on the controller to measure:
+
+PWM frequency of 1.17kHz
+Speed step 1 - duty cycle 25.8%
+Speed step 2 - duty cycle 38.2%
+Speed step 3 - duty cycle 50.5%
+Speed step 4 - duty cycle 63.5%
+Speed step 5 - duty cycle 76.1%
+Speed step 6 - duty cycle 88.2%
+Speed step 7 - duty cycle 100%
