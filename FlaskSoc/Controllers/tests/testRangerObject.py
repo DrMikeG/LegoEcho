@@ -13,8 +13,7 @@ class TestRangerObject(unittest.TestCase):
     def test_RangerObjectGetDistance(self):
         ranger = RangerObject(23,24)
         print ranger.getDistance()
-        del ranger    
-        self.assertEqual('foo'.upper(), 'FOO')
+        del ranger
 
 if __name__ == '__main__':
     unittest.main()

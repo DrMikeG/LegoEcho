@@ -5,6 +5,8 @@ class StubGPIO:
 
         triggerTime = 5 # Access through class
         triggerTimerStarted = False
+        pulseTime = 5
+        pulseTimerStarted = False
 
         inOrOutDict = {} # indexed by pin number (int) whether IN or OUT or nothing
         outputDict = {} # # indexed by pin number (int) whether OUTPUT is True or False 
@@ -44,12 +46,10 @@ class StubGPIO:
 
         @staticmethod    
         def shouldStartTriggerTimer(pin, value):
-            should = StubGPIO.triggerTimerStarted == False & \
-            StubGPIO.testGetOutput(23) == True & \
-            pin == 23 & \
-            value == False
-            print "should start trigger :"
-            print should
+            should = StubGPIO.triggerTimerStarted == False # Timer is not already started
+            should = should & (StubGPIO.testGetOutput(23) == True) # Trigger is already true
+            should = should & (pin == 23) # Trigger
+            should = should & (value == False) # Is being set to false
             return should
 
         @staticmethod    
@@ -61,16 +61,31 @@ class StubGPIO:
         @staticmethod    
         def checkTriggerTimer():
             if StubGPIO.triggerTimerStarted == True:
-                if (time.time() - StubGPIO.triggerTimer > 1):
+                elapsed = time.time() - StubGPIO.triggerTimer 
+                if (elapsed > 0.25):
                     StubGPIO.triggerTimerStarted = False
-                    StubGPIO.inputDict[24] = True # when timer expires, echo pin goes true
+                    StubGPIO.startPulseTimer() # start the pulse timer
+
+        @staticmethod    
+        def startPulseTimer():
+            StubGPIO.pulseTimer = time.time()
+            StubGPIO.pulseTimerStarted = True
+            StubGPIO.inputDict[24] = True # echo pin is True for duration of pulse
+
+        @staticmethod    
+        def checkPulseTimer():
+            if StubGPIO.pulseTimerStarted == True:
+                if (time.time() - StubGPIO.pulseTimer > 0.25):
+                    StubGPIO.pulseTimerStarted = False
+                    StubGPIO.inputDict[24] = False # when timer expires, echo pin goes low (end of pulse)
 
         @staticmethod    
         def output(pin, value):
-            StubGPIO.outputDict[pin] = value
-            
+            #Check this before changing value!
             if StubGPIO.shouldStartTriggerTimer(pin,value):
                 StubGPIO.startTriggerTimer()
+            
+            StubGPIO.outputDict[pin] = value
                 
             return True
 
@@ -80,8 +95,11 @@ class StubGPIO:
 
         @staticmethod
         def input(pin):
+            # May change echo pin value to True
             StubGPIO.checkTriggerTimer()
-
+            # May change echo pin value to False
+            StubGPIO.checkPulseTimer()
+            
             value = StubGPIO.inputDict.get(pin,False)
             return value
          

@@ -75,18 +75,44 @@ class TestStubGPIO(unittest.TestCase):
         GPIOInterface.cleanup()
         # 24 start false
         GPIOInterface.testSetInput(ECHO,False)
-        self.assertEqual(False,GPIOInterface.input(ECHO))
+        self.assertEqual(False,GPIOInterface.input(ECHO),"Echo pin should be Low")
         # Check not triggered
-        self.assertEqual(False,GPIOInterface.triggerTimerStarted)
+        self.assertEqual(False,GPIOInterface.triggerTimerStarted,"Trigger timer should not be started")
         # Pulse triggers
         GPIOInterface.output(TRIG, False)
         GPIOInterface.output(TRIG, True)
         time.sleep(0.00001)
         GPIOInterface.output(TRIG, False)
-        # Check triggered
-        self.assertEqual(True,GPIOInterface.triggerTimerStarted)
-        
 
+        timeAfterTrigger = time.time()
+        # Check triggered
+        self.assertEqual(True,GPIOInterface.triggerTimerStarted,"Trigger timer should have been started")
+        # Not yet in echo pulse
+        self.assertEqual(False,GPIOInterface.pulseTimerStarted,"Echo pulse timer should not be started yet")
+
+        # Wait for start of echo pulse
+        while GPIOInterface.input(ECHO)==0:
+            #print "Waiting for echo timer to expire"
+            timeStartOfEcho = time.time()
+
+        delayBeforeEchoStart = timeStartOfEcho - timeAfterTrigger
+        self.assertTrue(delayBeforeEchoStart > 0.25,"Delay before Echo start should be at least 0.25 seconds")
+        self.assertTrue(delayBeforeEchoStart < 0.3, "Delay before Echo start should be less than 0.3 seconds")
+
+        #Timer has expired and changes echo to true
+        self.assertEqual(True,GPIOInterface.input(ECHO),"Echo has started, pin 24 should be high")
+        # Pulse timer has started
+        self.assertEqual(True,GPIOInterface.pulseTimerStarted,"Pulse timer should have started")
+        # Wait during Echo pulse
+        while GPIOInterface.input(ECHO)==1:
+            timeEndOfEcho = time.time()
+
+        #    print "Waiting for pulse timer to expire"
+        self.assertEqual(False,GPIOInterface.pulseTimerStarted,"Pulse timer should have expired")
+        self.assertEqual(False,GPIOInterface.triggerTimerStarted,"Trigger timer should still be expire")
+
+        lengthOfEcho =timeEndOfEcho - timeStartOfEcho
+        self.assertTrue(lengthOfEcho > 0.24,"Duration of Echo pulse should be at least 0.24 seconds")
 
 if __name__ == '__main__':
     unittest.main()
