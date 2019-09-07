@@ -4,6 +4,13 @@ class StubGPIO:
 
 
         triggerTime = 5 # Access through class
+        triggerTimerStarted = False
+
+        inOrOutDict = {} # indexed by pin number (int) whether IN or OUT or nothing
+        outputDict = {} # # indexed by pin number (int) whether OUTPUT is True or False 
+
+        inputDict = {} # # indexed by pin number (int) whether INPUT is True or False 
+
         BCM = True
         IN = False
         OUT = True
@@ -19,28 +26,68 @@ class StubGPIO:
 
         @staticmethod
         def cleanup(*args,**kwargs):
+            StubGPIO.inOrOutDict.clear()
+            StubGPIO.outputDict.clear()
+            StubGPIO.inputDict.clear()
             return True
 
         @staticmethod
-        def setup(*args,**kwargs):
+        def setup(pin, inOrOut):
+            #First argument should be int (pin number) 
+            #Second argument should be bool (in or out)
+            StubGPIO.inOrOutDict[pin] = inOrOut
             return True
+
+        @staticmethod
+        def testGetSetup(pin):
+            return StubGPIO.inOrOutDict.get(pin)
+
+        @staticmethod    
+        def shouldStartTriggerTimer(pin, value):
+            should = StubGPIO.triggerTimerStarted == False & \
+            StubGPIO.testGetOutput(23) == True & \
+            pin == 23 & \
+            value == False
+            print "should start trigger :"
+            print should
+            return should
+
+        @staticmethod    
+        def startTriggerTimer():
+            StubGPIO.triggerTimer = time.time()
+            StubGPIO.triggerTimerStarted = True
+            StubGPIO.inputDict[24] = False # echo pin is false for duration of timer
+
+        @staticmethod    
+        def checkTriggerTimer():
+            if StubGPIO.triggerTimerStarted == True:
+                if (time.time() - StubGPIO.triggerTimer > 1):
+                    StubGPIO.triggerTimerStarted = False
+                    StubGPIO.inputDict[24] = True # when timer expires, echo pin goes true
 
         @staticmethod    
         def output(pin, value):
-            if pin == 23 & value == 1:
-                # trigger time
-                StubGPIO.triggerTime = time.time()
+            StubGPIO.outputDict[pin] = value
+            
+            if StubGPIO.shouldStartTriggerTimer(pin,value):
+                StubGPIO.startTriggerTimer()
+                
             return True
+
+        @staticmethod    
+        def testGetOutput(pin):
+            return StubGPIO.outputDict.get(pin,False)
 
         @staticmethod
         def input(pin):
-            value = 0
-            if pin ==  24:
-                # If it has been more than n since trigger, return 1
-                # Else return 0
-                if StubGPIO.triggerTime > 1000:
-                    value = 1
+            StubGPIO.checkTriggerTimer()
+
+            value = StubGPIO.inputDict.get(pin,False)
             return value
+         
+        @staticmethod    
+        def testSetInput(pin,value):
+            StubGPIO.inputDict[pin]=value
 
    #{"setup", (PyCFunction)py_setup_channel, METH_VARARGS | METH_KEYWORDS, "Set up a GPIO channel or list of channels with a direction and (optional) pull/up down control\nchannel        - either board pin number or BCM number depending on which mode is set.\ndirection      - IN or OUT\n[pull_up_down] - PUD_OFF (default), PUD_UP or PUD_DOWN\n[initial]      - Initial value for an output channel"},
    #{"cleanup", (PyCFunction)py_cleanup, METH_VARARGS | METH_KEYWORDS, "Clean up by resetting all GPIO channels that have been used by this program to INPUT with no pullup/pulldown and no event detection\n[channel] - individual channel or list/tuple of channels to clean up.  Default - clean every channel that has been used."},
