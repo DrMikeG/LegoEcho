@@ -2,10 +2,13 @@ import time
 
 class StubGPIO:
 
+
         triggerTime = 5 # Access through class
         BCM = True
-        IN = True
+        IN = False
         OUT = True
+        HIGH = 1
+        LOW = 0
 
         def __init__(self):
             StubGPIO.triggerTime = 0
