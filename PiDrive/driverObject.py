@@ -26,7 +26,6 @@ import RPi.GPIO as GPIO
 #  analogWrite(ENablePin, motorSpeed);    //Speed   
 #}
 
-
 class DriverObject:
         def __init__(self,isStubbed=False):
             
@@ -42,7 +41,16 @@ class DriverObject:
                 GPIO.setup(self.Ctrl1B_BCM,GPIO.OUT)
                 #Setup PWM out:
                 GPIO.setup(self.Enable_BCM, GPIO.OUT) # PWM pin set as output
-                self.pwm = GPIO.PWM(self.Enable_BCM, 490) # Initialize PWM on pwmPin 490Hz frequency
+                #self.pwm = GPIO.PWM(self.Enable_BCM, 490) # Initialize PWM on pwmPin 490Hz frequency
+                self.pwm = GPIO.PWM(self.Enable_BCM, 1170) # Initialize PWM on pwmPin 1170Hz frequency
+                #PWM frequency of 1.17kHz
+                #Speed step 1 - duty cycle 25.8%
+                #Speed step 2 - duty cycle 38.2%
+                #Speed step 3 - duty cycle 50.5%
+                #Speed step 4 - duty cycle 63.5%
+                #Speed step 5 - duty cycle 76.1%
+                #Speed step 6 - duty cycle 88.2%
+                #Speed step 7 - duty cycle 100%
 
             #Enable_BCM = 12 
             #Ctrl1A_BCM = 13
