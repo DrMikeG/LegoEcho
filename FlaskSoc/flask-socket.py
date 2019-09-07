@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, join_room, emit
-from FlaskSoc import RangerObject
+from Controllers.rangerobject import RangerObject
 
 #from codenames import game
 

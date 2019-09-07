@@ -47,3 +47,6 @@ You can make a list of installed packages inside the virtualenv:
 And install them on the destination virtualenv using:
 
     $ pip install -r requirements.txt
+
+
+Run tests with \LegoEcho\FlaskSoc> python -m unittest discover

@@ -1,15 +1,12 @@
 import time
 import random
 
-import sys
-sys.path.append(".")
 
 try:
     import RPi.GPIO as GPIOInterface
 except ImportError:
-    print "Using Stub GPIOInterface"
-    from FlaskSoc import StubGPIO as GPIOInterface
-
+    print "[RangerObject] - Using [Stub GPIOInterface]"
+    from Controllers.stubgpio import StubGPIO as GPIOInterface
 
 class RangerObject:
         def __init__(self,trigPinBCM=None,echoPinBMC=None):
@@ -19,8 +16,7 @@ class RangerObject:
             self.ECHO = 24
             if echoPinBMC !=  None:
                 self.ECHO = echoPinBMC
-            
-            GPIOInterface.setmode(GPIOInterface.BCM)
+                        
             GPIOInterface.setup(self.TRIG,GPIOInterface.OUT)
             GPIOInterface.setup(self.ECHO,GPIOInterface.IN)
 #TRIG = 23 
